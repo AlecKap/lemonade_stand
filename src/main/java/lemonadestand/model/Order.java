@@ -14,13 +14,6 @@ public class Order {
     total = 0.0;
   }
 
-  private void updateTotal() {
-    total = 0.0; // confused on this part here?
-    for (Lemonade l : lemonades) {
-      total += l.getPrice();
-    }
-  }
-
   public void addLemonade(Lemonade lemonade) {
 //    Lemonade[] temp = new Lemonade[lemonades.length + 1];
 //    for (int i = 0; i < lemonades.length; i++) {
@@ -29,7 +22,7 @@ public class Order {
     Lemonade[] newLemonadeArray = Arrays.copyOf(lemonades, lemonades.length + 1); // creates a temp array. same as above.
     newLemonadeArray[newLemonadeArray.length - 1] = lemonade;
     lemonades = newLemonadeArray;
-    updateTotal();
+    total += lemonade.getPrice();
   }
 
   public Customer getCustomer() {
