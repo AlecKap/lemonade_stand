@@ -1,15 +1,17 @@
 package lemonadestand.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
 public class Order {
 	private Customer customer;
-	private Lemonade[] lemonades;
+	private ArrayList<Lemonade> lemonades;
 	private double total;
 
 	public Order(Customer customer) {
 		super();
 		this.customer = customer;
-		lemonades = new Lemonade[0];
+		lemonades = new ArrayList<>();
 		total = 0.0;
 	}
 
@@ -18,17 +20,29 @@ public class Order {
 //    for (int i = 0; i < lemonades.length; i++) {
 //      temp[i] = lemonades[i];
 //    }
-		Lemonade[] newLemonadeArray = Arrays.copyOf(lemonades, lemonades.length + 1); // creates a temp array. same as above.
-		newLemonadeArray[newLemonadeArray.length - 1] = lemonade;
-		lemonades = newLemonadeArray;
+
+		// Lemonade[] newLemonadeArray = Arrays.copyOf(lemonades, lemonades.length + 1); // creates a temp array. same as above.
+		// newLemonadeArray[newLemonadeArray.length - 1] = lemonade;
+		// lemonades = newLemonadeArray;
+		lemonades.add(lemonade);
 		total += lemonade.getPrice();
+	}
+
+	public void addLemonades(ArrayList<Lemonade> lemonades) {
+		this.lemonades.addAll(lemonades);
+		for (Lemonade l : lemonades) {
+			total += l.getPrice();
+		}
 	}
 
 	public Customer getCustomer() {
 		return customer;
 	}
 
-	public Lemonade[] getLemonades() {
+	// public Lemonade[] getLemonades() {
+	// 	return lemonades.toArray(new Lemonade[lemonades.size()])
+	// } same as below
+	public ArrayList<Lemonade> getLemonades() {
 		return lemonades;
 	}
 
@@ -41,7 +55,7 @@ public class Order {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
-		result = prime * result + Arrays.hashCode(lemonades);
+		result = prime * result + lemonades.hashCode();
 		return result;
 	}
 
@@ -59,13 +73,14 @@ public class Order {
 				return false;
 		} else if (!customer.equals(other.customer))
 			return false;
-		if (!Arrays.equals(lemonades, other.lemonades))
+		if (lemonades.equals(other.getLemonades()))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [customer=" + customer + ", lemonades=" + Arrays.toString(lemonades) + ", total=" + total + "]";
+		// return "Order [customer=" + customer + ", lemonades=" + Arrays.toString(lemonades) + ", total=" + total + "]";
+		return "Order [customer=" + customer + ", lemonades=" + lemonades.toString() + ", total=" + total + "]";
 	}
 }
