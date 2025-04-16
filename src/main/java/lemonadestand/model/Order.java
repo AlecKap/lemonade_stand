@@ -2,10 +2,11 @@ package lemonadestand.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Order {
 	private Customer customer;
-	private ArrayList<Lemonade> lemonades;
+	private List<Lemonade> lemonades;
 	private double total;
 
 	public Order(Customer customer) {
@@ -28,7 +29,7 @@ public class Order {
 		total += lemonade.getPrice();
 	}
 
-	public void addLemonades(ArrayList<Lemonade> lemonades) {
+	public void addLemonades(List<Lemonade> lemonades) {
 		this.lemonades.addAll(lemonades);
 		for (Lemonade l : lemonades) {
 			total += l.getPrice();
@@ -42,7 +43,7 @@ public class Order {
 	// public Lemonade[] getLemonades() {
 	// 	return lemonades.toArray(new Lemonade[lemonades.size()])
 	// } same as below
-	public ArrayList<Lemonade> getLemonades() {
+	public List<Lemonade> getLemonades() {
 		return lemonades;
 	}
 
