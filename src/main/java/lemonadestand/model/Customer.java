@@ -13,6 +13,10 @@ public class Customer implements Person {
 		return phoneNumber;
 	}
 
+  public String getName() {
+		return name;
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [name=" + getName() + ", phoneNumber=" + phoneNumber + "]";
@@ -48,8 +52,4 @@ public class Customer implements Person {
       return false;
     return true;
   }
-
-  public String getName() {
-		return name;
-	}
 }
