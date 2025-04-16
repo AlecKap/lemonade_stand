@@ -1,18 +1,17 @@
 package lemonadestand.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Order {
 	private Customer customer;
-	private List<Lemonade> lemonades;
+	private Set<Lemonade> lemonades;
 	private double total;
 
 	public Order(Customer customer) {
 		super();
 		this.customer = customer;
-		lemonades = new ArrayList<>();
+		lemonades = new HashSet<>();
 		total = 0.0;
 	}
 
@@ -25,11 +24,12 @@ public class Order {
 		// Lemonade[] newLemonadeArray = Arrays.copyOf(lemonades, lemonades.length + 1); // creates a temp array. same as above.
 		// newLemonadeArray[newLemonadeArray.length - 1] = lemonade;
 		// lemonades = newLemonadeArray;
-		lemonades.add(lemonade);
-		total += lemonade.getPrice();
+		if (lemonades.add(lemonade)) {
+			total += lemonade.getPrice();
+		}
 	}
 
-	public void addLemonades(List<Lemonade> lemonades) {
+	public void addLemonades(Set<Lemonade> lemonades) {
 		this.lemonades.addAll(lemonades);
 		for (Lemonade l : lemonades) {
 			total += l.getPrice();
@@ -43,7 +43,7 @@ public class Order {
 	// public Lemonade[] getLemonades() {
 	// 	return lemonades.toArray(new Lemonade[lemonades.size()])
 	// } same as below
-	public List<Lemonade> getLemonades() {
+	public Set<Lemonade> getLemonades() {
 		return lemonades;
 	}
 
