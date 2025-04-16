@@ -81,7 +81,6 @@ public class Order {
 
 	@Override
 	public String toString() {
-		// return "Order [customer=" + customer + ", lemonades=" + Arrays.toString(lemonades) + ", total=" + total + "]";
 		return "Order [customer=" + customer + ", lemonades=" + lemonades.toString() + ", total=" + total + "]";
 	}
 }
