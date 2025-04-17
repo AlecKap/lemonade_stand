@@ -90,8 +90,8 @@ public class Lemonade {
 
 	@Override
 	public String toString() {
-		return "Lemonade [lemonJuice=" + lemonJuice + ", water=" + water + ", sugar=" + sugar + ", CUP=" + CUP
-				+ ", price=" + price + ", iceCube=" + iceCube + "]";
+		return "Lemonade {lemonJuice=" + lemonJuice + ", water=" + water + ", sugar=" + sugar + ", CUP=" + CUP
+				+ ", price=" + price + ", iceCube=" + iceCube + "}";
 	}
 
 }
