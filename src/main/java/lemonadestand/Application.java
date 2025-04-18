@@ -1,5 +1,9 @@
 package lemonadestand;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import lemonadestand.model.Customer;
@@ -7,7 +11,7 @@ import lemonadestand.model.Lemonade;
 import lemonadestand.model.Order;
 
 public class Application {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Welcome to the LemonadeStand Application!");
@@ -57,8 +61,17 @@ public class Application {
 			order.addLemonade(new Lemonade(lemonJuice, water, sugar, iceCubes));
 		}
 
+		File file = new File("./orders");
+		
+		File[] files = file.listFiles();
+
+		FileOutputStream fileOutputStream = new FileOutputStream(file + "/order" + (files.length + 1) + ".txt");
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		
+		objectOutputStream.writeObject(order);
+
 		System.out.println("Thank you, we have confirmed your order!");
-		System.out.println("Your order total is " + order.getTotal());
-		System.out.println("Pleasebe ready to pick up your order!");
+		System.out.println("Your order total is $" + order.getTotal());
+		System.out.println("Please be ready to pick up your order!");
 	}
 }

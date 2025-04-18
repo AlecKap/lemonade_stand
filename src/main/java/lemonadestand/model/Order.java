@@ -1,9 +1,15 @@
 package lemonadestand.model;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8745943974813643519L;
+
 	private Customer customer;
 	private List<Lemonade> lemonades;
 	private double total;

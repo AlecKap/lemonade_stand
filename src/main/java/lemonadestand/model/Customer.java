@@ -1,6 +1,11 @@
 package lemonadestand.model;
 
 public class Customer implements Person {
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5243658913641133659L;
+
 	private String name;
 	private String phoneNumber;
 

@@ -1,18 +1,8 @@
 package lemonadestand.model;
 
-//public class Person {
-//	private String name;
-//
-//	public Person(String name) {
-//		this.name = name;
-//	}
-//
-//	public String getName() {
-//		return name;
-//	}
-//
-//}
-public interface Person {
+import java.io.Serializable;
+
+public interface Person extends Serializable {
 	
 	public String getName();
 }
