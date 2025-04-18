@@ -1,7 +1,7 @@
 package lemonadestand.model;
 
 public class LemonadeStand {
-  String name;
+  private String name;
 
   public LemonadeStand(String name) {
     this.name = name;
