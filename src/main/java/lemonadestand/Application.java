@@ -1,6 +1,7 @@
 package lemonadestand;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -11,7 +12,7 @@ import lemonadestand.model.Lemonade;
 import lemonadestand.model.Order;
 
 public class Application {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Welcome to the LemonadeStand Application!");
@@ -65,13 +66,36 @@ public class Application {
 		
 		File[] files = file.listFiles();
 
-		FileOutputStream fileOutputStream = new FileOutputStream(file + "/order" + (files.length + 1) + ".txt");
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		FileOutputStream fileOutputStream = null;
+		ObjectOutputStream objectOutputStream = null;
+		try {
+			fileOutputStream = new FileOutputStream(file + "/order" + (files.length + 1) + ".txt");
+			objectOutputStream = new ObjectOutputStream(fileOutputStream);
+			objectOutputStream.writeObject(order);
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		} catch (IOException e) {
+			System.out.println("Failed to create file. Please be sure that orders directory exists");
+		} finally {
+			try {
+				if (fileOutputStream != null) {
+					fileOutputStream.close();
+				}
+				if (objectOutputStream != null) {
+					objectOutputStream.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
-		objectOutputStream.writeObject(order);
+		
+		
 
 		System.out.println("Thank you, we have confirmed your order!");
 		System.out.println("Your order total is $" + order.getTotal());
 		System.out.println("Please be ready to pick up your order!");
+
+		scanner.close();
 	}
 }
