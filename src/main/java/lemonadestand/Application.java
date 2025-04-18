@@ -1,83 +1,64 @@
 package lemonadestand;
 
-import java.security.Key;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
 import lemonadestand.model.Customer;
 import lemonadestand.model.Lemonade;
-import lemonadestand.model.LemonadeStand;
 import lemonadestand.model.Order;
 
 public class Application {
 	public static void main(String[] args) {
-		Customer customer1 = new Customer("Alec", "(123)4567890");
-		Customer customer2 = new Customer("Halie", "(123)4567899");
+		Scanner scanner = new Scanner(System.in);
 
-		Order order1 = new Order(customer1);
-		Order order2 = new Order(customer2);
+		System.out.println("Welcome to the LemonadeStand Application!");
+		System.out.println("Provide your name and phone number to create an order");
+		System.out.println("Let's start with your name:");
 
-		order1.addLemonade(new Lemonade(1, .5, 1, 5));
-		order1.addLemonade(new Lemonade(1, .5, 1, 5));
-		order1.addLemonade(new Lemonade(1, .5, 1, 5));
-		order1.addLemonade(new Lemonade(1, .5, 1, 5));
-
-		// for (Lemonade l : order1.getLemonades()) {
-		// 	System.out.println(l.getPrice());
-		// }
-		// System.out.println(order1.getCustomer().getName() + ", your total price is: $" + order1.getTotal() + "!");
-
-		order2.addLemonade(new Lemonade(1, .5, 1, 5));
-		order2.addLemonade(new Lemonade(2, .5, 1, 5));
-		order2.addLemonade(new Lemonade(1, .5, 2, 5));
-		order2.addLemonade(new Lemonade(.5, .5, 2, 5));
-
-		// for (Lemonade l : order2.getLemonades()) {
-		// 	System.out.println(l.getPrice());
-		// }
-		// System.out.println(order2.getCustomer().getName() + ", your total price is: $" + order2.getTotal() + "!");
-
-		// System.out.println(order1.toString());
-		// System.out.println(order1);
-		// System.out.println(order1.equals(order1));
-
-		// Box<Order> b1 = new Box<Order>(order1);
-		// Box<Customer> b2 = new Box<>(customer2);
-
-		// b1.setObj(order2);
+		String name = scanner.nextLine();
 		
-		// ((Order) b1.getObj()).addLemonade(new Lemonade(2,1.5,1.75,5));
-		// b1.getObj().addLemonade(new Lemonade(2,1.5,1.75,5));
-		// b2.setObj(customer1);
+		System.out.println("Hi " + name + ", nice to meet you!");
+		System.out.println("Next we need your number so we will be able to call you when your order is ready:");
+		
+		
+		String phoneNumber = scanner.nextLine();
 
-		// System.out.println(b1.getObj());
-		// System.out.println(b2.getObj());
-		// System.out.println(b2.getObj().getName());
+		System.out.println("Awesome, thank you! We recoreded your phone number as: " + phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3" ));
+		System.out.println("Is that correct?");
 
-		// b2.<Customer, Order>printValue(customer1, order2);
-		// b2.printValue(customer1, order2);
+		String validation = "".toUpperCase();
 
-		// Box<Integer> b3 = new Box<Integer>(1);
+		do {
+			if (validation.equals("N")) {
+				System.out.println("Ok, no problem. Please re-enter your phone number:");
+				phoneNumber = scanner.nextLine();
+				System.out.println("Awesome, thank you! We recoreded your phone number as: " + phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3" ));
+				System.out.println("Is that correct? (Y/N)");
+			}
+			System.out.println("Please enter Y or N.");
+			validation = scanner.nextLine().toUpperCase();
+		} while (!validation.equals("Y"));
+		
+		System.out.println("Great! Let's get started with your order.");
 
-		LemonadeStand lemonStand1 = new LemonadeStand("Rachel's Lemonade Stand");
-		LemonadeStand lemonStand2 = new LemonadeStand("Bob's Lemon Drinks");
+		Customer customer = new Customer(name, phoneNumber);
+		Order order = new Order(customer);
 
-		Map<LemonadeStand, List<Order>> lemonandStandOrders = new HashMap<>();
+		System.out.println("How many lemondaes do you want to order");
 
+		for (int numOfLemonades = scanner.nextInt(), currentLemonade = 1; numOfLemonades > 0; numOfLemonades--, currentLemonade++) {
+			System.out.println("How much lemon juice do you want for lemonade " + currentLemonade + "? (in cups)");			
+			double lemonJuice = scanner.nextDouble();
+			System.out.println("How much water do you want for lemonade " + currentLemonade + "? (in cups)");
+			double water = scanner.nextDouble();
+			System.out.println("How much sugar do you want for lemonade " + currentLemonade + "?? (in cups)");
+			double sugar = scanner.nextDouble();
+			System.out.println("How many ice cubes do you want for lemonade " + currentLemonade + "?? (in cups)");
+			int iceCubes = scanner.nextInt();
+			order.addLemonade(new Lemonade(lemonJuice, water, sugar, iceCubes));
+		}
 
-
-		// List<Order> lemonStand1Orders = new ArrayList<>();
-		// lemonStand1Orders.add(order1);
-		// lemonandStandOrders.put(lemonStand1, lemonStand1Orders);
-		lemonandStandOrders.put(lemonStand1, Arrays.asList(new Order[] { order1, order2 })); // Same as above but on one line
-
-		lemonandStandOrders.put(lemonStand2, Arrays.asList(new Order[] { order2 }));
-
-		System.out.println(lemonandStandOrders.get(lemonStand1));
-
-		System.out.println(lemonandStandOrders.keySet());
+		System.out.println("Thank you, we have confirmed your order!");
+		System.out.println("Your order total is " + order.getTotal());
+		System.out.println("Pleasebe ready to pick up your order!");
 	}
 }
