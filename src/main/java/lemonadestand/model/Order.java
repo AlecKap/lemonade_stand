@@ -1,35 +1,26 @@
 package lemonadestand.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Order {
 	private Customer customer;
-	private Set<Lemonade> lemonades;
+	private List<Lemonade> lemonades;
 	private double total;
 
 	public Order(Customer customer) {
 		super();
 		this.customer = customer;
-		lemonades = new HashSet<>();
+		lemonades = new ArrayList<>();
 		total = 0.0;
 	}
 
 	public void addLemonade(Lemonade lemonade) {
-//    Lemonade[] temp = new Lemonade[lemonades.length + 1];
-//    for (int i = 0; i < lemonades.length; i++) {
-//      temp[i] = lemonades[i];
-//    }
-
-		// Lemonade[] newLemonadeArray = Arrays.copyOf(lemonades, lemonades.length + 1); // creates a temp array. same as above.
-		// newLemonadeArray[newLemonadeArray.length - 1] = lemonade;
-		// lemonades = newLemonadeArray;
-		if (lemonades.add(lemonade)) {
-			total += lemonade.getPrice();
-		}
+		lemonades.add(lemonade);
+		total += lemonade.getPrice();
 	}
 
-	public void addLemonades(Set<Lemonade> lemonades) {
+	public void addLemonades(List<Lemonade> lemonades) {
 		this.lemonades.addAll(lemonades);
 		for (Lemonade l : lemonades) {
 			total += l.getPrice();
@@ -43,7 +34,7 @@ public class Order {
 	// public Lemonade[] getLemonades() {
 	// 	return lemonades.toArray(new Lemonade[lemonades.size()])
 	// } same as below
-	public Set<Lemonade> getLemonades() {
+	public List<Lemonade> getLemonades() {
 		return lemonades;
 	}
 
