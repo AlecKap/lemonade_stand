@@ -14,15 +14,30 @@ public class Customer implements Person {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getPhoneNumber() {
+	public Customer() {
+  }
+  
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
+
+  public String getPhoneNumber() {
 		return phoneNumber;
 	}
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
 
   public String getName() {
 		return name;
 	}
+  
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	@Override
+  @Override
 	public String toString() {
 		return "Customer {name=" + getName() + ", phoneNumber=" + phoneNumber + "}";
 	}

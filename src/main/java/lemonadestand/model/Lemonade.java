@@ -2,6 +2,8 @@ package lemonadestand.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Lemonade implements Serializable {
 	/**
 	 * 
@@ -24,6 +26,34 @@ public class Lemonade implements Serializable {
 		calculatePrice();
 	}
 
+	public Lemonade() {
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public void setLemonJuice(double lemonJuice) {
+		this.lemonJuice = lemonJuice;
+	}
+
+	public void setWater(double water) {
+		this.water = water;
+	}
+
+	public void setSugar(double sugar) {
+		this.sugar = sugar;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public void setIceCube(int iceCube) {
+		this.iceCube = iceCube;
+	}
+
 	private void calculatePrice() {
 		price = (lemonJuice * .3) + (sugar * .15) + (CUP * .5);
 	}
@@ -40,6 +70,7 @@ public class Lemonade implements Serializable {
 		return sugar;
 	}
 
+	@JsonIgnore
 	public int getCUP() {
 		return CUP;
 	}

@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
+import com.fasterxml.jackson.core.exc.StreamWriteException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lemonadestand.model.Customer;
 import lemonadestand.model.Lemonade;
 import lemonadestand.model.Order;
@@ -66,30 +70,36 @@ public class Application {
 		
 		File[] files = file.listFiles();
 
-		FileOutputStream fileOutputStream = null;
-		ObjectOutputStream objectOutputStream = null;
+		// FileOutputStream fileOutputStream = null;
+		// ObjectOutputStream objectOutputStream = null;
+		// try {
+		// 	fileOutputStream = new FileOutputStream(file + "/order" + (files.length + 1) + ".txt");
+		// 	objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		// 	objectOutputStream.writeObject(order);
+		// } catch (FileNotFoundException e) {
+		// 	System.out.println("File not found");
+		// } catch (IOException e) {
+		// 	System.out.println("Failed to create file. Please be sure that orders directory exists");
+		// } finally {
+		// 	try {
+		// 		if (fileOutputStream != null) {
+		// 			fileOutputStream.close();
+		// 		}
+		// 		if (objectOutputStream != null) {
+		// 			objectOutputStream.close();
+		// 		}
+		// 	} catch (Exception e) {
+		// 		e.printStackTrace();
+		// 	}
+		// }
+		
+		ObjectMapper objectMapper = new ObjectMapper();
 		try {
-			fileOutputStream = new FileOutputStream(file + "/order" + (files.length + 1) + ".txt");
-			objectOutputStream = new ObjectOutputStream(fileOutputStream);
-			objectOutputStream.writeObject(order);
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found");
+			objectMapper.writeValue(new File(file + "/order" + (files.length + 1) + ".json"), order);
 		} catch (IOException e) {
-			System.out.println("Failed to create file. Please be sure that orders directory exists");
-		} finally {
-			try {
-				if (fileOutputStream != null) {
-					fileOutputStream.close();
-				}
-				if (objectOutputStream != null) {
-					objectOutputStream.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		
 		
 
 		System.out.println("Thank you, we have confirmed your order!");

@@ -21,7 +21,10 @@ public class Order implements Serializable {
 		total = 0.0;
 	}
 
-	public void addLemonade(Lemonade lemonade) {
+	public Order() {
+  }
+
+  public void addLemonade(Lemonade lemonade) {
 		lemonades.add(lemonade);
 		total += lemonade.getPrice();
 	}
@@ -33,13 +36,26 @@ public class Order implements Serializable {
 		}
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public void setLemonades(List<Lemonade> lemonades) {
+		this.lemonades = lemonades;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
 
-	// public Lemonade[] getLemonades() {
-	// 	return lemonades.toArray(new Lemonade[lemonades.size()])
-	// } same as below
 	public List<Lemonade> getLemonades() {
 		return lemonades;
 	}
